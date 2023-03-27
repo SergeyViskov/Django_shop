@@ -8,6 +8,16 @@ class Category(models.Model):
         unique=True,
         verbose_name='Название'
     )
+    slug = models.SlugField(
+        max_length=255,
+        unique=True,
+        db_index=True,
+        verbose_name="URL"
+    )
+    image = models.ImageField(
+        upload_to='goods/images/',
+        verbose_name='Картинка'
+    )
     order = models.SmallIntegerField(
         default=0,
         db_index=True,
