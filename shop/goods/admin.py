@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import SubCategory, SuperCategory
+from .models import SubCategory, SuperCategory, Goods
 from .forms import SubCategoryForm
 
 
@@ -20,3 +20,23 @@ class SubRubricAdmin(admin.ModelAdmin):
 
 
 admin.site.register(SubCategory, SubRubricAdmin)
+
+
+class GoodsAdmin(admin.ModelAdmin):
+    list_display = (
+        'title',
+        'sub_category',
+        'slug',
+        'price',
+        'image',
+    )
+    fields = (
+        'title',
+        'sub_category',
+        'slug',
+        'price',
+        'image',
+    )
+
+
+admin.site.register(Goods, GoodsAdmin)
