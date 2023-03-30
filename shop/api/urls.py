@@ -1,10 +1,10 @@
 from django.urls import path
 
-from .views import super_category, goods, goods_detail
+from .views import SuperCategoriesView, GoodsView, GoodsDetailView
 
 
 urlpatterns = [
-    path('super-category/', super_category),
-    path('goods/', goods),
-    path('goods/<int:id>/', goods_detail),
+    path('super-category/', SuperCategoriesView.as_view()),
+    path('goods/', GoodsView.as_view()),
+    path('goods/<int:id>/', GoodsDetailView.as_view()),
 ]
