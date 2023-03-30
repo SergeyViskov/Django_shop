@@ -29,3 +29,14 @@ class GoodsDetailView(APIView):
         goods = get_list_or_404(Goods, id=id)
         serializer = GoodsDetailSerializes(goods, many=True)
         return Response(serializer.data)
+
+
+class CartView(APIView):
+    def get(self, request):
+        pass
+
+    def postt(self, request):
+        pass
+
+    def update(self, request):
+        pass

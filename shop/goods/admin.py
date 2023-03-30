@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import SubCategory, SuperCategory, Goods
+from .models import SubCategory, SuperCategory, Goods, Cart, CartItems
 from .forms import SubCategoryForm
 
 
@@ -40,3 +40,5 @@ class GoodsAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Goods, GoodsAdmin)
+admin.site.register(Cart)
+admin.site.register(CartItems)
