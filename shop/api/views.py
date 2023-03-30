@@ -1,10 +1,13 @@
 from rest_framework.response import Response
-from rest_framework.decorators import api_view
 from django.shortcuts import get_list_or_404
 from rest_framework.views import APIView
 
 from goods.models import SuperCategory, Goods
-from .serializers import SuperCategorySerializer, GoodsSerializes, GoodsDetailSerializes
+from .serializers import (
+    SuperCategorySerializer,
+    GoodsSerializes,
+    GoodsDetailSerializes,
+)
 
 
 class SuperCategoriesView(APIView):
