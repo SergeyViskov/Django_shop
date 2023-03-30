@@ -1,6 +1,8 @@
 from rest_framework.response import Response
 from django.shortcuts import get_list_or_404
 from rest_framework.views import APIView
+from rest_framework.generics import ListAPIView
+from rest_framework.pagination import PageNumberPagination
 
 from goods.models import SuperCategory, Goods
 from .serializers import (
@@ -8,20 +10,19 @@ from .serializers import (
     GoodsSerializes,
     GoodsDetailSerializes,
 )
+from .pagination import LimitPagination
 
 
-class SuperCategoriesView(APIView):
-    def get(self, request):
-        super_category = SuperCategory.objects.all()
-        serializer = SuperCategorySerializer(super_category, many=True)
-        return Response(serializer.data)
+class SuperCategoriesView(ListAPIView):
+    queryset = SuperCategory.objects.all()
+    serializer_class = SuperCategorySerializer
+    pagination_class = LimitPagination
 
 
-class GoodsView(APIView):
-    def get(self, request):
-        goods = Goods.objects.all()
-        serializer = GoodsSerializes(goods, many=True)
-        return Response(serializer.data)
+class GoodsView(ListAPIView):
+    queryset = Goods.objects.all()
+    serializer_class = GoodsSerializes
+    pagination_class = LimitPagination
 
 
 class GoodsDetailView(APIView):
