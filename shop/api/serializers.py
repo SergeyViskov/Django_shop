@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from goods.models import SuperCategory, Goods
+from goods.models import SuperCategory, Goods, Cart, CartItems
 
 
 class SuperCategorySerializer(serializers.ModelSerializer):
@@ -37,3 +37,17 @@ class GoodsDetailSerializes(serializers.ModelSerializer):
             'price',
             'image',
         )
+
+
+class CartSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Cart
+        fields = '__all__'
+
+
+class CartItemsSerialiser(serializers.ModelSerializer):
+    cart = CartSerializer()
+    goods = GoodsSerializes()
+    class Meta:
+        model = CartItems
+        fields = '__all__'
