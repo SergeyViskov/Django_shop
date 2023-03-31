@@ -1,12 +1,22 @@
 from rest_framework import serializers
 from versatileimagefield.serializers import VersatileImageFieldSerializer
 
-from goods.models import SuperCategory, Goods, Cart, CartItems
+from goods.models import SuperCategory, SubCategory, Goods, Cart, CartItems
 
 
 class SuperCategorySerializer(serializers.ModelSerializer):
     class Meta:
         model = SuperCategory
+        fields = (
+            'id',
+            'name',
+            'slug',
+        )
+
+
+class SubCategorySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = SubCategory
         fields = (
             'id',
             'name',

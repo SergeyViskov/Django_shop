@@ -4,9 +4,10 @@ from rest_framework.views import APIView
 from rest_framework.generics import ListAPIView
 from rest_framework.permissions import IsAuthenticated
 
-from goods.models import SuperCategory, Goods, Cart, CartItems
+from goods.models import SuperCategory, SubCategory, Goods, Cart, CartItems
 from .serializers import (
     SuperCategorySerializer,
+    SubCategorySerializer,
     GoodsSerializes,
     GoodsDetailSerializes,
     CartItemsSerialiser,
@@ -19,6 +20,13 @@ class SuperCategoriesView(ListAPIView):
     permission_classes = [IsReadOnly]
     queryset = SuperCategory.objects.all()
     serializer_class = SuperCategorySerializer
+    pagination_class = LimitPagination
+
+
+class SubCategoriesView(ListAPIView):
+    permission_classes = [IsReadOnly]
+    queryset = SubCategory.objects.all()
+    serializer_class = SubCategorySerializer
     pagination_class = LimitPagination
 
 
@@ -53,7 +61,13 @@ class CartView(APIView):
         goods = Goods.objects.get(id=data.get('goods'))
         price = goods.price
         quantity = data.get('quantity')
-        cart_items = CartItems(cart=cart, user=user, goods=goods, price=price, quantity=quantity)
+        cart_items = CartItems(
+            cart=cart,
+            user=user,
+            goods=goods,
+            price=price,
+            quantity=quantity,
+        )
         cart_items.save()
         total_price = 0
         cart_items = CartItems.objects.filter(user=user, cart=cart.id)

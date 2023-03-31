@@ -134,8 +134,3 @@ def correct_price(sender, **kwargs):
     cart_items = kwargs['instance']
     price_of_goods = Goods.objects.get(id=cart_items.goods.id)
     cart_items.price = int(cart_items.quantity) * float(price_of_goods.price)
-    # total_cart_items = CartItems.objects.filter(user=cart_items.user)
-    # cart_items.total_items = len(total_cart_items)
-    # cart = Cart.objects.get(id=cart_items.cart.id)
-    # cart.total_price = cart_items.price
-    # cart.save()
