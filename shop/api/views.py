@@ -12,21 +12,25 @@ from .serializers import (
     CartItemsSerialiser,
 )
 from .pagination import LimitPagination
+from .permissions import IsReadOnly
 
 
 class SuperCategoriesView(ListAPIView):
+    permission_classes = [IsReadOnly]
     queryset = SuperCategory.objects.all()
     serializer_class = SuperCategorySerializer
     pagination_class = LimitPagination
 
 
 class GoodsView(ListAPIView):
+    permission_classes = [IsReadOnly]
     queryset = Goods.objects.all()
     serializer_class = GoodsSerializes
     pagination_class = LimitPagination
 
 
 class GoodsDetailView(APIView):
+    permission_classes = [IsReadOnly]
     def get(self, request, id):
         goods = get_list_or_404(Goods, id=id)
         serializer = GoodsDetailSerializes(goods, many=True)
