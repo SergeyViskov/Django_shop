@@ -64,6 +64,20 @@ python manage.py migrate
 python manage.py runserver
 ```
 
+## Аутентификация по JWT-токену:
+### Пример создания пользователя:
+1. Отправьте POST-запрос на http://127.0.0.1:8000/auth/users/
+```
+{
+    "username": "django_shop",
+    "password": "Django_shop3"
+}
+```
+
+2. Теперь можно получить токен: отправьте POST-запрос на эндпоинт /auth/jwt/create/, передав действующий логин и пароль в полях username и password
+
+3. API вернёт JWT-токен
+
 ## Набор доступных эндпоинтов:
 * ```super-category/``` - Просмотр всех категорий (_GET_);
 * ```sub-category/``` - Просмотр всех подкатегорий (_GET_);
