@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.db.models.signals import pre_save, post_save
 from django.dispatch import receiver
+from versatileimagefield.fields import VersatileImageField, PPOIField
 
 from .utilities import get_timestamp_path
 
@@ -96,11 +97,12 @@ class Goods(models.Model):
         default=0,
         verbose_name='Цена'
     )
-    image = models.ImageField(
-        blank=True,
+    image = VersatileImageField(
+        'Image',
         upload_to=get_timestamp_path,
-        verbose_name='Изображение'
+        ppoi_field='image_ppoi',
     )
+    image_ppoi = PPOIField()
 
     class Meta:
         verbose_name = 'Товар'

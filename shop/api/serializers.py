@@ -1,4 +1,5 @@
 from rest_framework import serializers
+from versatileimagefield.serializers import VersatileImageFieldSerializer
 
 from goods.models import SuperCategory, Goods, Cart, CartItems
 
@@ -14,6 +15,14 @@ class SuperCategorySerializer(serializers.ModelSerializer):
 
 
 class GoodsSerializes(serializers.ModelSerializer):
+    image = VersatileImageFieldSerializer(
+        sizes=[
+            ('full_size', 'url'),
+            ('thumbnail', 'thumbnail__100x100'),
+            ('medium_square_crop', 'crop__400x400'),
+            ('small_square_crop', 'crop__50x50')
+        ]
+    )
     class Meta:
         model = Goods
         fields = (
@@ -27,6 +36,14 @@ class GoodsSerializes(serializers.ModelSerializer):
 
 
 class GoodsDetailSerializes(serializers.ModelSerializer):
+    image = VersatileImageFieldSerializer(
+        sizes=[
+            ('full_size', 'url'),
+            ('thumbnail', 'thumbnail__100x100'),
+            ('medium_square_crop', 'crop__400x400'),
+            ('small_square_crop', 'crop__50x50')
+        ]
+    )
     class Meta:
         model = Goods
         fields = (
